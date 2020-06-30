@@ -21,17 +21,17 @@ func TestPush(t *testing.T) {
 func TestPop(t *testing.T) {
 	
 		s:= New()
-		_,err := s.pop()
+		val,err := s.pop()
 		if err == nil {
-			t.Errorf("Expected Stack is empty , but got %v",err)
+			t.Errorf("Expected Stack is empty , but got %v",val)
 		}
 }
 
 func TestPeep(t *testing.T) {
 	    s:= New()
-		_,err := s.peep()
+		val,err := s.peep()
 		if err == nil {
-			t.Errorf("Expected Stack is empty , but got %v",err)
+			t.Errorf("Expected Stack is empty , but got %v",val)
 		}
 	
 }
