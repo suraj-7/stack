@@ -25,7 +25,7 @@ func (se stackEmpty) Error() string {
 	return "stack is empty!"
 }
 
-func (s *stack) push(elem int) error {
+func (s *stack) Push(elem int) error {
    if s.top == 99 {
 	   return stackOverflow{}
    }
@@ -34,7 +34,7 @@ func (s *stack) push(elem int) error {
    return nil
 }
 
-func (s *stack) pop() (int,error) {
+func (s *stack) Pop() (int,error) {
 	if s.top == -1 {
 		return -1,stackEmpty{}
 	}
@@ -43,7 +43,7 @@ func (s *stack) pop() (int,error) {
 	return elem,nil
 }
 
-func (s *stack) peep() (int,error) {
+func (s *stack) Peep() (int,error) {
 	if s.top == -1 {
 		return -1,stackEmpty{}
 	}
@@ -52,19 +52,19 @@ func (s *stack) peep() (int,error) {
 
 func main() {
 	s := New()
-	err := s.push(5)
+	err := s.Push(5)
 	if err != nil {
 		fmt.Println("Error Occured : ",err)
 		return
 	}
 	fmt.Println("5 is pushed")
-	val,err := s.pop() 
+	val,err := s.Pop() 
     if err != nil {
 		fmt.Println("Error Occured : ",err)
 		return
 	}
 	fmt.Println("Poped Element : ",val)
-	val,err = s.peep()
+	val,err = s.Peep()
 	if err != nil {
 		fmt.Println("Error Occured : ",err)
 		return

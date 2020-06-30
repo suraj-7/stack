@@ -2,6 +2,22 @@ package main
 
 import "testing"
 
+func TestStackOverflow(t *testing.T) {
+	s:= New()
+	
+	if tp := s.top;tp == 99 {
+		t.Fatalf("Stack is Full")
+	}
+}
+
+func TestUnderOverflow(t *testing.T) {
+	s:= New()
+
+	if tp := s.top;tp != -1 {
+		t.Fatalf("Expected Stack to be Empty, but got %v",s.data[tp])
+	}
+}
+
 func TestPush(t *testing.T) {
 	tests := []struct {
 		input  int
@@ -10,7 +26,7 @@ func TestPush(t *testing.T) {
 	}
     s:= New()
 	for _, tc := range tests {
-		r := s.push(tc.input)
+		r := s.Push(tc.input)
 		if r != nil {
 			t.Fatalf("Expected no error , but got %v",r)
 		}
@@ -18,20 +34,29 @@ func TestPush(t *testing.T) {
 	
 }
 
-func TestPop(t *testing.T) {
-	
-		s:= New()
-		val,err := s.pop()
-		if err == nil {
-			t.Errorf("Expected Stack is empty , but got %v",val)
+
+func TestNormalPop(t *testing.T) {
+	s:= New()
+	for i:=0 ;i<5;i++ {
+		s.Push(i)
+	}
+	for i:=0 ;i<5;i++ {
+		output := 4-i
+		val,_ := s.Pop()
+        if val != output {
+			t.Errorf("Expected %v , but got %v ",output,val)
 		}
+	}
+
 }
 
-func TestPeep(t *testing.T) {
-	    s:= New()
-		val,err := s.peep()
-		if err == nil {
-			t.Errorf("Expected Stack is empty , but got %v",val)
+
+func TestNormalPeep(t *testing.T) {
+	s:= New()
+	s.Push(5)
+	output := 5
+	val,_ := s.Peep()
+     if val != output {
+			t.Errorf("Expected %v , but got %v ",output,val)
 		}
-	
 }
