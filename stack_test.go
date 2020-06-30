@@ -4,25 +4,26 @@ import "testing"
 
 func TestStackOverflow(t *testing.T) {
 	s:= New()
-	for i:=0;i<100;i++ {
-		s.Push(i)
-	}
-	if tp := s.top;tp != 99 {
-		t.Fatalf("Expected Stack to be Full,but got top as %v",tp)
+	for i:=0;i<=100;i++ {
+		Err := s.Push(i)
+		if Err != nil {
+			t.Logf("Expected Stack to be Full , got %v",Err)
+		}
 	}
 }
 
-func TestUnderOverflow(t *testing.T) {
+func TestUnderOverflow(t *testing.T)  {
 	s:= New()
-    for i:=0;i<99;i++ {
+    for i:=0;i<100;i++ {
 		s.Push(i)
 	}
-	for i:=0;i<99;i++ {
-		s.Pop()
-	}
-	if tp := s.top;tp != -1 {
-		t.Fatalf("Expected Stack to be Empty, but got %v",s.data[tp])
-	}
+	for i:=0;i<=100;i++ {
+		_,Err := s.Pop()
+		if(Err != nil){
+		   t.Logf("Expected Stack to be empty, got %v",Err)
+		}
+	}  
+
 }
 
 func TestPush(t *testing.T) {
@@ -33,9 +34,9 @@ func TestPush(t *testing.T) {
 	}
     s:= New()
 	for _, tc := range tests {
-		r := s.Push(tc.input)
-		if r != nil {
-			t.Fatalf("Expected no error , but got %v",r)
+		Err := s.Push(tc.input)
+		if Err != nil {
+			t.Fatalf("Expected no error , but got %v",Err)
 		}
 	}
 	
@@ -49,9 +50,12 @@ func TestNormalPop(t *testing.T) {
 	}
 	for i:=0 ;i<5;i++ {
 		output := 4-i
-		val,_ := s.Pop()
+		val,Err := s.Pop()
         if val != output {
 			t.Errorf("Expected %v , but got %v ",output,val)
+		}
+		if Err != nil {
+			t.Errorf("Expected no error , but got %v ",Err)
 		}
 	}
 
@@ -62,8 +66,11 @@ func TestNormalPeep(t *testing.T) {
 	s:= New()
 	s.Push(5)
 	output := 5
-	val,_ := s.Peep()
+	val,Err := s.Peep()
      if val != output {
 			t.Errorf("Expected %v , but got %v ",output,val)
 		}
+	if Err != nil {
+			t.Errorf("Expected no error , but got %v ",Err)
+	}	
 }
