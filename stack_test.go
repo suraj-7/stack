@@ -8,7 +8,7 @@ func TestStackOverflow(t *testing.T) {
 		Err := s.Push(i)
 		if Err != nil {
 			if (Err != stackOverflow{}) {
-			t.Errorf("Expected Stack to be Full , got %v",Err)
+				t.Errorf("Expected Stack to be Full , got %v",Err)
 			}
 		}
 	}
