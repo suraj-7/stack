@@ -4,15 +4,22 @@ import "testing"
 
 func TestStackOverflow(t *testing.T) {
 	s:= New()
-	
-	if tp := s.top;tp == 99 {
-		t.Fatalf("Stack is Full")
+	for i:=0;i<100;i++ {
+		s.Push(i)
+	}
+	if tp := s.top;tp != 99 {
+		t.Fatalf("Expected Stack to be Full,but got top as %v",tp)
 	}
 }
 
 func TestUnderOverflow(t *testing.T) {
 	s:= New()
-
+    for i:=0;i<99;i++ {
+		s.Push(i)
+	}
+	for i:=0;i<99;i++ {
+		s.Pop()
+	}
 	if tp := s.top;tp != -1 {
 		t.Fatalf("Expected Stack to be Empty, but got %v",s.data[tp])
 	}
