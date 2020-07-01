@@ -4,13 +4,13 @@ import "testing"
 
 func TestStackOverflow(t *testing.T) {
 	s:= New()
-	for i:=0;i<=100;i++ {
-		Err := s.Push(i)
-		if Err != nil {
-			if (Err != stackOverflow{}) {
-				t.Errorf("Expected Stack to be Full , got %v",Err)
-			}
-		}
+	for i:=0;i<100;i++ {
+		s.Push(i)
+	}
+	Err := s.Push(10) 
+	if Err != nil && (Err != stackOverflow{}){
+		
+			t.Errorf("Expected Stack to be Full , got %v",Err)
 	}
 }
 
@@ -19,15 +19,13 @@ func TestUnderOverflow(t *testing.T)  {
     for i:=0;i<100;i++ {
 		s.Push(i)
 	}
-	for i:=0;i<=100;i++ {
-		_,Err := s.Pop()
-		if Err != nil {
-			if (Err != stackEmpty{}) {
-				t.Errorf("Expected Stack to be empty, got %v",Err)
-			} 
-		} 
-
+	for i:=0;i<100;i++ {
+		s.Pop()
 	}  
+	_,Err := s.Pop()
+	if Err != nil && (Err != stackEmpty{}){
+			t.Errorf("Expected Stack to be empty, got %v",Err)
+	} 
 
 }
 
